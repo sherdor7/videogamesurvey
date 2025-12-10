@@ -161,12 +161,28 @@ def run_survey():
         )
     return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
 
+
+
+    try:
+        with open("survey_results.json", "r+") as file:
+            data = json.load(file)  # load existing data
+            data.append(result)     # add new result
+            file.seek(0)            # reset file pointer
+            json.dump(data, file, indent=4)
+    except FileNotFoundError:
+        # If file doesn’t exist, create new list
+        with open("survey_results.json", "w") as file:
+            json.dump([result], file, indent=4)
+
+    return "Survey submitted successfully!"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
 
 
 
     
+
 
 
 
