@@ -156,5 +156,9 @@ def run_survey():
         )
     return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
+
+
 
     
