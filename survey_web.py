@@ -82,6 +82,8 @@ def run_survey():
     if request.method == "POST":
         name = request.form.get("name")
         student_id = request.form.get("student_id")
+        if not student_id:
+            student_id = "anonymous"
         birth_date_str = request.form.get("birth_date")
         plays_games = request.form.get("plays_games")
 
@@ -165,6 +167,7 @@ if __name__ == "__main__":
 
 
     
+
 
 
 
