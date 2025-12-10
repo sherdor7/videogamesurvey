@@ -7,6 +7,8 @@ import os
 
 survey = Blueprint("survey", __name__)
 
+
+
 @app.route("/")
 def home():
     return "<h2>Welcome to the Video Game Survey!</h2><p><a href='/survey'>Start Survey</a></p>"
@@ -160,6 +162,9 @@ def run_survey():
             single=single_result
         )
     return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
+@app.route("/survey")
+def survey():
+    return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
@@ -167,5 +172,6 @@ if __name__ == "__main__":
 
 
     
+
 
 
