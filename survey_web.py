@@ -1,13 +1,9 @@
-from flask import Blueprint, render_template, request
+from flask import render_template, request
 from flask import Flask
 app = Flask(__name__)
 from datetime import datetime
 import json
 import os
-
-survey = Blueprint("survey", __name__)
-
-
 
 @app.route("/")
 def home():
@@ -81,7 +77,7 @@ def interpret(score, thresholds):
             return message
     return thresholds[-1][1]
 
-@survey.route("/", methods=["GET", "POST"])
+@app.route("/survey", methods=["GET", "POST"])
 def run_survey():
     if request.method == "POST":
         name = request.form.get("name")
@@ -162,9 +158,6 @@ def run_survey():
             single=single_result
         )
     return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
-@app.route("/survey")
-def survey():
-    return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
@@ -172,6 +165,7 @@ if __name__ == "__main__":
 
 
     
+
 
 
 
