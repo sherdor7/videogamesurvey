@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request
+from flask import Flask
+app = Flask(__name__)
 from datetime import datetime
 import json
 import os
@@ -162,3 +164,4 @@ if __name__ == "__main__":
 
 
     
+
