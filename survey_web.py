@@ -7,6 +7,9 @@ import os
 
 survey = Blueprint("survey", __name__)
 
+@app.route("/")
+def home():
+    return "<h2>Welcome to the Video Game Survey!</h2><p><a href='/survey'>Start Survey</a></p>"
 competitive_questions = [
     {"text": "I feel overwhelmed when playing competitive online games.",
      "options": {"Never": 0, "Rarely": 1, "Sometimes": 2, "Often": 3, "Always": 4}},
@@ -164,4 +167,5 @@ if __name__ == "__main__":
 
 
     
+
 
