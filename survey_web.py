@@ -155,11 +155,18 @@ def view_results(student_id):
     if os.path.exists(filepath):
         with open(filepath, "r", encoding="utf-8") as f:
             data = json.load(f)
-        return render_template("result.html", **data)
+        return render_template("result.html",  name=data["name"],
+                               student_id=data["student_id"],
+                               birth_date=data["birth_date"],
+                               age=data["age"],
+                               overall=data["overall"],
+                               comp=data["competitive"],         
+                               single=data["single_player"]))
     else:
         return f"No results found for student ID {student_id}"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
