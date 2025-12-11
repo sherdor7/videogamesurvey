@@ -161,12 +161,13 @@ def view_results(student_id):
                                age=data["age"],
                                overall=data["overall"],
                                comp=data["competitive"],         
-                               single=data["single_player"]))
+                               single=data["single_player"])
     else:
         return f"No results found for student ID {student_id}"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
