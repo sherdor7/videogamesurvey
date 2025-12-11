@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home():
     return "<h2>Welcome to the Video Game Survey!</h2><p><a href='/survey'>Start Survey</a></p>"
 
-# --- Competitive questions ---
+
 competitive_questions = [
     {"text": "I feel overwhelmed when playing competitive online games.",
      "options": {"Never": 0, "Rarely": 1, "Sometimes": 2, "Often": 3, "Always": 4}},
@@ -29,7 +29,7 @@ competitive_questions = [
      "options": {"Never": 0, "Rarely": 1, "Sometimes": 2, "Often": 3, "Always": 4}}
 ]
 
-# --- Singleplayer questions ---
+
 singleplayer_questions = [
     {"text": "I feel relaxed when playing single player games.",
      "options": {"Never": 4, "Rarely": 3, "Sometimes": 2, "Often": 1, "Always": 0}},
@@ -47,14 +47,14 @@ singleplayer_questions = [
      "options": {"Never": 0, "Rarely": 1, "Sometimes": 2, "Often": 3, "Always": 4}}
 ]
 
-# --- Interpretation helper ---
+
 def interpret(score, thresholds):
     for bound, message in thresholds:
         if score >= bound:
             return message
     return thresholds[-1][1]
 
-# --- Survey route ---
+
 @app.route("/survey", methods=["GET", "POST"])
 def run_survey():
     if request.method == "POST":
@@ -63,7 +63,7 @@ def run_survey():
         birth_date_str = request.form.get("birth_date")
         plays_games = request.form.get("plays_games")
 
-        # Parse birth date
+        
         age = None
         birth_date_fmt = birth_date_str
         if birth_date_str and len(birth_date_str) == 8 and birth_date_str.isdigit():
@@ -106,7 +106,7 @@ def run_survey():
                 (0, "Very healthy psychological state.")
             ])
 
-        # Build data dictionary
+        
         data = {
             "name": name,
             "student_id": student_id,
@@ -118,13 +118,13 @@ def run_survey():
             "single_player": single_result
         }
 
-        # Save individual file
+        
         os.makedirs("results", exist_ok=True)
         filepath = os.path.join("results", f"{student_id}.json")
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
-        # Save to master file
+        
         try:
             with open("survey_results.json", "r+", encoding="utf-8") as file:
                 all_data = json.load(file)
@@ -167,6 +167,7 @@ def view_results(student_id):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
