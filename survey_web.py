@@ -138,6 +138,16 @@ def run_survey():
         return render_template("result.html", **data)
 
     return render_template("survey.html", comp_qs=competitive_questions, single_qs=singleplayer_questions)
+@app.route("/results/<student_id>")
+def view_results(student_id):
+    filepath = os.path.join("results", f"{student_id}.json")
+    if os.path.exists(filepath):
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return render_template("result.html", **data)
+    else:
+        return f"No results found for student ID {student_id}"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
